@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="info.niteshjha.springlearning"/>
+    <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="database.properties"/>
+    </bean>
+
+
+    <bean class="info.niteshjha.springlearning.repository.VenueDaoImpl" id="venueDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+
+    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+        <property name="driverClassName" value="${db.oracle.driverClassName}"/>
+        <property name="username" value="${db.oracle.username}"/>
+        <property name="password" value="${db.oracle.pwd}"/>
+        <property name="url" value="${db.oracle.url}"/>
+    </bean>
+
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>info.niteshjha.springlearning.model.Venue</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean class="org.springframework.orm.hibernate5.HibernateTemplate" id="hibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="checkWriteOperations" value="false"/>
+    </bean>
+
+</beans>
