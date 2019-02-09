@@ -11,12 +11,16 @@
 
 
     <bean class="info.niteshjha.springaop.LogBeforeAdvice" id="logBeforeAdvice"/>
+    <bean class="info.niteshjha.springaop.LoggingAfterAdvice" id="loggingAfterAdvice"/>
+    <bean class="info.niteshjha.springaop.LoggingThrowsAdvice" id="loggingThrowsAdvice"/>
 
     <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxyFactoryBean" primary="true">
         <property name="target" ref="bussinessDao"/>
         <property name="interceptorNames">
             <list>
                 <value>logBeforeAdvice</value>
+                <value>loggingAfterAdvice</value>
+                <value>loggingThrowsAdvice</value>
             </list>
         </property>
     </bean>

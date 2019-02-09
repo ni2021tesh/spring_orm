@@ -32,7 +32,12 @@ public class BussinessDao {
     }
 
     public void throwException() {
-        log.info("Throw exception method called ..");
-        throw new RuntimeException("Exception thrown for testing AOP by ::" + this.name);
+        log.info("Begin:: Throw exception.");
+        try {
+            throw new RuntimeException("Exception thrown for testing AOP by ::" + this.name);
+        } catch (Exception e) {
+            log.info("exception occurred....");
+        }
+        log.info("End:: throws Exception.");
     }
 }

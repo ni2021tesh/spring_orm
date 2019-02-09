@@ -7,6 +7,9 @@ public class TestSpringAop {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("spring-aop-learning.xml");
         BussinessDao bean = classPathXmlApplicationContext.getBean(BussinessDao.class);
         bean.display();
-        //bean.throwException();
+        try {
+            bean.throwException();
+        } catch (Exception e) {
+        }
     }
 }
