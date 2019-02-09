@@ -8,9 +8,6 @@
     <artifactId>springorm</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>spring-aop-learning</module>
-    </modules>
 
     <name>springorm</name>
 
@@ -49,14 +46,6 @@
             <version>5.1.4.RELEASE</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-            <scope>provided</scope>
-        </dependency>
-
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -75,6 +64,14 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

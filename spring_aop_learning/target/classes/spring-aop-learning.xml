@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="info.niteshjha.springaop.BussinessDao" id="bussinessDao" primary="false">
+        <property name="name" value="Nitesh Jha"/>
+        <property name="prop" value="https://www.niteshjha.info"/>
+    </bean>
+
+
+    <bean class="info.niteshjha.springaop.LogBeforeAdvice" id="logBeforeAdvice"/>
+
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxyFactoryBean" primary="true">
+        <property name="target" ref="bussinessDao"/>
+        <property name="interceptorNames">
+            <list>
+                <value>logBeforeAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
