@@ -14,13 +14,26 @@
     <bean class="info.niteshjha.springaop.LoggingAfterAdvice" id="loggingAfterAdvice"/>
     <bean class="info.niteshjha.springaop.LoggingThrowsAdvice" id="loggingThrowsAdvice"/>
 
+    <bean class="info.niteshjha.springaop.LogginAroundAdvice" id="aroundAdvice"/>
+
+    <bean class="org.springframework.aop.support.NameMatchMethodPointcut" id="bussinessDaoPointCut">
+        <property name="mappedName" value="throwException*"/>
+    </bean>
+
+
+    <bean id="pointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="pointcut" ref="bussinessDaoPointCut"/>
+        <property name="advice" ref="aroundAdvice"/>
+    </bean>
+
     <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxyFactoryBean" primary="true">
         <property name="target" ref="bussinessDao"/>
         <property name="interceptorNames">
             <list>
-                <value>logBeforeAdvice</value>
-                <value>loggingAfterAdvice</value>
-                <value>loggingThrowsAdvice</value>
+                <!-- <value>logBeforeAdvice</value>
+                 <value>loggingAfterAdvice</value>
+                 <value>loggingThrowsAdvice</value>-->
+                <value>pointcutAdvisor</value>
             </list>
         </property>
     </bean>
