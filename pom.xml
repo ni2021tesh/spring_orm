@@ -6,7 +6,11 @@
 
     <groupId>info.niteshjha.springlearning</groupId>
     <artifactId>springorm</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-aop-learning</module>
+    </modules>
 
     <name>springorm</name>
 
