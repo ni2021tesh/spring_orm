@@ -21,7 +21,7 @@ public class LoggingAspect {
     }
 
 
-    @After(value = "execution(* info.niteshjha.spring_aop_annotation.BussinessService.displayName(..))")
+    @After(value = "execution(* info.niteshjha.spring_aop_annotation.BussinessService.throwException(..))")
     public void logAfter(JoinPoint joinPoint) {
         System.out.println("After calling " + joinPoint.getSignature().getName());
         log.info("Displaying from LoggingAspect class and logAfter(Pointcut pointcut) method");
@@ -34,12 +34,12 @@ public class LoggingAspect {
     }
 
 
-    @AfterReturning(value = "execution( * info.niteshjha.spring_aop_annotation.BussinessService.getName(..))", returning = "returns")
+    @AfterReturning(value = "execution( * info.niteshjha.spring_aop_annotation.BussinessService.throwException(..))", returning = "returns")
     public void logAfterReturning(JoinPoint joinPoint, Object returns) {
         System.out.println("After Returning from " + joinPoint.getSignature().getName());
     }
 
-    @Around(value = "execution( * info.niteshjha.spring_aop_annotation.BussinessService.getNames(..))")
+    @Around(value = "execution( * info.niteshjha.spring_aop_annotation.BussinessService.getName(..))")
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("Around Advice " + joinPoint.getSignature().getName());
 

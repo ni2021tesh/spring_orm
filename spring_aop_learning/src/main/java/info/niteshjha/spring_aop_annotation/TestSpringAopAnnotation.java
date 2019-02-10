@@ -13,9 +13,6 @@ public class TestSpringAopAnnotation {
         System.out.println("***********************************************************************************");
         bean.getName("ID_2");
         System.out.println("***********************************************************************************");
-        try {
-            bean.throwException();
-        } catch (Exception e) {
-        }
+        bean.throwException();
     }
 }
