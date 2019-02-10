@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="bussinessService" class="info.niteshjha.springaop_xsd.BussinessServiceImpl"/>
+
+    <bean id="loggingAspect" class="info.niteshjha.springaop_xsd.LoggingAspect"/>
+
+    <aop:config proxy-target-class="true">
+        <aop:aspect id="logBeforeAspect" ref="loggingAspect">
+            <aop:pointcut id="beforePointCut"
+                          expression="execution(* info.niteshjha.springaop_xsd.BussinessService.getNames(..))"/>
+            <aop:before method="logBefore" pointcut-ref="beforePointCut"/>
+        </aop:aspect>
+
+        <aop:aspect ref="loggingAspect" id="logAfterAspect">
+            <aop:pointcut id="afterPointCut"
+                          expression="execution(* info.niteshjha.springaop_xsd.BussinessServiceImpl.displayName(..))"/>
+            <aop:after method="logAfter" pointcut-ref="afterPointCut"/>
+        </aop:aspect>
+
+        <aop:aspect id="throwsAspect" ref="loggingAspect">
+            <aop:pointcut expression="execution(* info.niteshjha.springaop_xsd.BussinessService.throwException(..))"
+                          id="throwExceptionPointCut"/>
+            <aop:after-throwing method="logAfterThrowing" pointcut-ref="throwExceptionPointCut" throwing="error"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
